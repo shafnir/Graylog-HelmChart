@@ -28,11 +28,11 @@ mongodb:
 
   volumes:
     # Size for the mongodb-data volume
-    mongodb-data:
+    mongodbData:
       storageSize: 4Gi # Default fits for a small lab
 
     # Size for the mongodb-data volume
-    mongodb-config:
+    mongodbConfig:
       storageSize: 4Gi # Default fits for a small lab
 
   # Values of the mongodb Service

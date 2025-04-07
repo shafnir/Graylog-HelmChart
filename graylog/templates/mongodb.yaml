@@ -35,12 +35,12 @@ spec:
       accessModes: ["ReadWriteOnce"]
       resources:
         requests:
-          storage: {{ .Values.mongodb.volumes.mongodb-data.storageSize }}
+          storage: {{ .Values.mongodb.volumes.mongodbData.storageSize }}
   - metadata:
       name: mongodb-config
     spec:
       accessModes: ["ReadWriteOnce"]
       resources:
         requests:
-          storage: {{ .Values.mongodb.volumes.mongodb-config.storageSize }}
+          storage: {{ .Values.mongodb.volumes.mongodbConfig.storageSize }}
 status: {}
