@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.datanode.Service.name }}
+  name: {{ .Values.datanode.Service.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - name: datanode-api
+    port: 8999
+    protocol: TCP
+    targetPort: 8999
+  - name: port-9200
+    port: 9200
+    protocol: TCP
+    targetPort: 9200
+  - name: port-9300
+    port: 9300
+    protocol: TCP
+    targetPort: 9300
+  selector:
+    {{ .Values.datanode.Service.name }}
+status:
+  loadBalancer: {}

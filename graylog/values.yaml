@@ -1,10 +1,44 @@
-# Graylog values file
+### Graylog values file ###
 
 namespace: graylog
 
+# Generate a password_secret for graylog internal communications. use the following command: < /dev/urandom tr -dc A-Z-a-z-0-9 | head -c${1:-96}; echo
+# Copy the result to the secret key.
+# For example: 
+# graylogPasswordSecret: NndwQWZ2N1lhbGJUbE82c0J6Q3R5WXUzZXNQcGJlLWFSa2ZUdmZOQ1I0eG5YN1NsTGtKSlJET1BFV3JlNjd0NFlubmZJVFhNaTg2cmJTc2k0NVdETFVOSXZwUy11bnhq
+graylogPasswordSecret: ["YOUR SECRET HERE"]
 
 
+# Default storageClass that depended on installing the hostpath provisioner from https://artifacthub.io/packages/helm/rimusz/hostpath-provisioner
+# You may change the default storageClass Provisioner if you have one
+storageClassName: hostpath
 
+
+datanode:
+
+  # Name of the deployment
+  name: datanode
+
+  # Hostname for the container
+  hostname: datanode
+
+  # Image and tag of the graylog datanode, officialy supported with graylog/graylog-datanode:6.1.10
+  image:
+    name: graylog/graylog-datanode
+    tag: 6.1.10
+
+  # Size for the mongodb-data volume
+  volume:
+      storage: 8Gi # Default fits for a small lab, Set as much storage as you need for your datanode storage
+
+  # Datanode container memory resource request and limit
+  containerResources:
+    memory:
+      requests: 1Gi
+      limits: 3Gi
+
+  Service:
+    name: datanode
 
 
 
@@ -29,11 +63,11 @@ mongodb:
   volumes:
     # Size for the mongodb-data volume
     mongodbData:
-      storageSize: 4Gi # Default fits for a small lab
+      storageSize: 4Gi # Default fits for a small lab, Set as much storage as you need for your mongodb data.
 
     # Size for the mongodb-data volume
     mongodbConfig:
-      storageSize: 4Gi # Default fits for a small lab
+      storageSize: 4Gi # Default fits for a small lab, Set as much storage as you need for your mongodb config.
 
   # Values of the mongodb Service
   Service:
