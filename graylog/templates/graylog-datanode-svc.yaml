@@ -21,6 +21,6 @@ spec:
     protocol: TCP
     targetPort: 9300
   selector:
-    {{ .Values.datanode.Service.name }}
+    app: {{ .Values.datanode.Service.name }}
 status:
   loadBalancer: {}

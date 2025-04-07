@@ -20,7 +20,7 @@ spec:
       restartPolicy: Always
       containers:
       - image: "{{ .Values.mongodb.image.name }}:{{ .Values.mongodb.image.tag }}"
-        name: {{ .Values.mongodb.image.name }}
+        name: mongodb
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-data
