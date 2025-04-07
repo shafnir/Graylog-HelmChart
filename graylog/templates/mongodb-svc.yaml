@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.mongodb.Service.name }}
+  name: {{ .Values.mongodb.Service.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - port: 27017
+    nodePort: {{ .Values.mongodb.Service.nodePort }}
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: {{ .Values.mongodb.Service.name }}
+  type: NodePort
+status:
+  loadBalancer: {}
