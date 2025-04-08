@@ -21,7 +21,7 @@ spec:
       volumes:
       - name: graylog-data
         persistentVolumeClaim:
-        claimName: graylog-pvc
+          claimName: graylog-pvc
       initContainers:
       - name: "wait-for-{{ .Values.mongodb.name }}"
         image: busybox
