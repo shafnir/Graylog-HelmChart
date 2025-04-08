@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Graylog_logo.svg/2560px-Graylog_logo.svg.png?s=800&v=4" alt="Graylog Logo" width="300"/>
+  <img src="https://github.com/user-attachments/assets/ce37e878-2eb9-44f4-9817-99796915682c?s=800&v=4" alt="Graylog Logo" width="450"/>
 </p>
 
 <h1 align="center">Graylog Open Helm Chart</h1>
