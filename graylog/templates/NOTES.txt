@@ -1,0 +1,13 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Retrieve the initial admin password from Graylog logs (based on the graylog pod name):
+
+kubectl logs -n {{ .Values.namespace }} "{{ .Values.graylog.name }}-xxxxxxx-xxxxx"
+
+You should see something like:
+
+Initial configuration is accessible at 0.0.0.0:9000, with username 'admin' and password 'bhQRFNUvIe'.
+Try clicking on http://admin:bhQRFNUvIe@0.0.0.0:9000
+
+Access the Graylog UI:
+http://[your-node-ip]:30900
