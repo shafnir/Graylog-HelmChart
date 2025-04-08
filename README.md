@@ -54,7 +54,8 @@ This deployment is made for a small lab environment, it is recommened to increas
 3. After filling the values in the values.yaml, install the chart:
 
     ```bash
-    helm install graylog -n graylog shafnir/graylog --create-namespace
+    helm repo add graylog https://shafnir.github.io/Graylog-HelmChart/graylog
+    helm install graylog -n graylog graylog/graylog --version 0.1.0 --create-namespace
     ```
 
 4. Verify that pods are running:
