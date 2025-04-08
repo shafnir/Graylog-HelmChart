@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.graylog.name }}
+  name: {{ .Values.graylog.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.graylog.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.graylog.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.graylog.name }}
+    spec:
+      hostname: {{ .Values.graylog.hostname }}
+      restartPolicy: Always
+      volumes:
+      - name: graylog-data
+        persistentVolumeClaim:
+        claimName: graylog-pvc
+      initContainers:
+      - name: "wait-for-{{ .Values.mongodb.name }}"
+        image: busybox
+        command: ["sh", "-c", "until nc -z {{ .Values.mongodb.Service.name }} 27017; do echo Waiting for {{ .Values.mongodb.name }} to to start; sleep 1; done;"]
+      - name: "wait-for-{{ .Values.datanode.name }}"
+        image: busybox
+        command: ["sh", "-c", "until nc -z {{ .Values.datanode.Service.name }} 8999; do echo Waiting for {{ .Values.datanode.name }} availability; sleep 1; done;"]
+      containers:
+      - command:
+        - /usr/bin/tini
+        - /docker-entrypoint.sh
+        image: "{{ .Values.graylog.image.name }}:{{ .Values.graylog.image.tag }}"
+        name: graylog
+        volumeMounts:
+        - mountPath: /usr/share/graylog/data/data
+          name: graylog-data
+        env:
+        - name: GRAYLOG_NODE_ID_FILE
+          value: "/usr/share/graylog/data/data/node-id"
+        - name: GRAYLOG_HTTP_BIND_ADDRESS
+          value: {{ .Values.graylog.env.httpBindAddress | quote }}
+        - name: GRAYLOG_HTTP_EXTERNAL_URI
+          value: {{ .Values.graylog.env.httpExternalURI | quote }}
+        - name: GRAYLOG_MONGODB_URI
+          value: "mongodb://{{ .Values.mongodb.Service.name }}:27017/graylog"
+        - name: GRAYLOG_PASSWORD_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: graylog-password-secret
+              key: GRAYLOG_PASSWORD_SECRET
+        - name: GRAYLOG_ROOT_PASSWORD_SHA2
+          valueFrom:
+            secretKeyRef:
+              name: graylog-root-password-sha256
+              key: GRAYLOG_PASSWORD_SHA256
+        resources: {}
+        ports:
+        - containerPort: 5044
+          name: beats
+        - containerPort: 5140
+          name: syslog-tcp
+          protocol: TCP
+        - containerPort: 5140
+          name: syslog-udp
+          protocol: UDP
+        - containerPort: 5555
+          name: raw-tcp
+          protocol: TCP
+        - containerPort: 5555
+          name: raw-udp
+          protocol: UDP
+        - containerPort: 9000
+          name: server-api
+        - containerPort: 12201
+          name: gelf-tcp
+          protocol: TCP
+        - containerPort: 12201
+          name: gelf-udp
+          protocol: UDP
+        - containerPort: 13301
+          name: forwarder-data
+        - containerPort: 13302
+          name: forwarder-conf
+status: {}

@@ -1,6 +1,4 @@
-### Graylog values file ###
 
-namespace: graylog
 
 # Generate a password_secret for graylog internal communications. use the following command: < /dev/urandom tr -dc A-Z-a-z-0-9 | head -c${1:-96}; echo
 # Copy the result to the secret key.
@@ -9,15 +7,62 @@ namespace: graylog
 graylogPasswordSecret: ["YOUR SECRET HERE"]
 
 
+# Generate a SHA256 of your desired password for the Graylog Management UI.
+# You can do so with the following command: echo -n "Enter Password: " && head -1 </dev/stdin | tr -d '\n' | sha256sum | cut -d" " -f1
+# Copy the SHA256 result into the graylogRootPasswordSHA256 key.
+# For example: 
+# graylogRootPasswordSHA256: 0c21487938d87494806f527b7939d2bbc12b938bf3baa7b6aba6de27baecdac0
+graylogRootPasswordSHA256: ["YOUR PASSWORD HASH HERE"]
+
+
+
+namespace: graylog
+
+
 # Default storageClass that depended on installing the hostpath provisioner from https://artifacthub.io/packages/helm/rimusz/hostpath-provisioner
 # You may change the default storageClass Provisioner if you have one
 storageClassName: hostpath
+
+
+graylog:
+
+  # Name of the deployment
+  name: graylog
+  
+  # Hostname for the container
+  hostname: graylog-server
+
+  # Image and tag of the graylog datanode, officialy supported with graylog/graylog:6.1.10
+  image:
+    name: graylog/graylog
+    tag: 6.1.10
+
+  # Number of desired replicas
+  replicas: 1
+
+  # Size for the graylog-data volume
+  volume:
+    storage: 4Gi # Default fits for a small lab, Set as much storage as you need for your graylog storage
+
+  # Env vars, that set the Management UI address and port, and from which address it should recieve connections
+  env:
+    httpBindAddress: "0.0.0.0:9000"
+    httpExternalURI: "http://localhost:9000/"
+
+  Service:
+    name: graylog
+    
+    management:
+      nodePort: 30900
 
 
 datanode:
 
   # Name of the deployment
   name: datanode
+
+  # Number of desired replicas
+  replicas: 1
 
   # Hostname for the container
   hostname: datanode
@@ -27,7 +72,7 @@ datanode:
     name: graylog/graylog-datanode
     tag: 6.1.10
 
-  # Size for the mongodb-data volume
+  # Size for the datanode volume
   volume:
       storage: 8Gi # Default fits for a small lab, Set as much storage as you need for your datanode storage
 

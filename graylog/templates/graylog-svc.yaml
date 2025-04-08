@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.graylog.Service.name }}
+  name: {{ .Values.graylog.Service.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - name: beats-input
+    port: 5044
+    protocol: TCP
+    targetPort: 5044
+  - name: syslog-tcp-input
+    port: 5140
+    protocol: TCP
+    targetPort: 5140
+  - name: syslog-udp-input
+    port: 5140
+    protocol: UDP
+    targetPort: 5140
+  - name: raw-tcp-input
+    port: 5555
+    protocol: TCP
+    targetPort: 5555
+  - name: raw-udp-input
+    port: 5555
+    protocol: UDP
+    targetPort: 5555
+  - name: graylog-rest-api # Also UI Port
+    port: 9000
+    nodePort: {{ .Values.graylog.Service.management.nodePort }}
+    protocol: TCP
+    targetPort: 9000
+  - name: gelf-tcp-input
+    port: 12201
+    protocol: TCP
+    targetPort: 12201
+  - name: gelf-udp-input
+    port: 12201
+    protocol: UDP
+    targetPort: 12201
+  - name: graylog-forwarder
+    port: 13301
+    protocol: TCP
+    targetPort: 13301
+  - name: graylog-forwarder-mapping
+    port: 13302
+    protocol: TCP
+    targetPort: 13302
+  selector:
+    app: {{ .Values.graylog.Service.name }}
+  type: NodePort
+status:
+  loadBalancer: {}

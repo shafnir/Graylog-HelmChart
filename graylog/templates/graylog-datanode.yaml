@@ -6,7 +6,7 @@ metadata:
   name: {{ .Values.datanode.name }}
   namespace: {{ .Values.namespace }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.datanode.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.datanode.name }}
@@ -25,7 +25,7 @@ spec:
       initContainers:
       - name: "wait-for-{{ .Values.mongodb.name }}"
         image: busybox
-        command: ["sh", "-c", "until nc -z {{ .Values.mongodb.Service.name }} 27017; do echo Waiting for {{ .Values.mongodb.Service.name }} availability; sleep 1; done;"]
+        command: ["sh", "-c", "until nc -z {{ .Values.mongodb.Service.name }} 27017; do echo Waiting for {{ .Values.mongodb.name }} availability; sleep 1; done;"]
       containers:
       - image: "{{ .Values.datanode.image.name }}:{{ .Values.datanode.image.tag }}"
         name: graylog-datanode
