@@ -5,6 +5,13 @@
 <h1 align="center">Graylog Open Helm Chart</h1>
 
 <p align="center">
+  <a href="https://artifacthub.io/packages/search?repo=graylog">
+    <img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/graylog" alt="Artifact Hub"/>
+  </a>
+</p>
+
+
+<p align="center">
   A fully working Helm Chart of <strong>Graylog Open Source.</strong>
 </p>
 
