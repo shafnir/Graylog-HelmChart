@@ -23,4 +23,4 @@ version: 1.0.2
 # It is recommended to use it with quotes.
 appVersion: "6.1.10"
 
-logo: https://raw.githubusercontent.com/shafnir/Graylog-HelmChart/refs/heads/main/graylog/assets/Graylog_logo.png
+logo: https://raw.githubusercontent.com/shafnir/Graylog-HelmChart/main/graylog/assets/Graylog_logo.png
