@@ -22,8 +22,8 @@ This setup deploys a minimal Graylog stack with:
 
 ## Additional Notes
 
+It is highly recommended to change the default secret and password in values.yaml.
 Please go through all the values in values.yaml and change according to your needs.  
-DO NOT DEPLOY the chart before populating the first 2 values (graylogPasswordSecret and graylogRootPasswordSHA256), it will not work without it!  
 Please review the allocated resources in the PVCs and the mongodb StatefulSet and ensure it matches your requirements.  
 This deployment is made for a small lab environment, it is recommened to increase the replicas, the allocated storage in the PVCs and the resource requests and limits of the datanode.
 
