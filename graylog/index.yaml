@@ -2,8 +2,18 @@ apiVersion: v1
 entries:
   graylog:
   - apiVersion: v2
+    appVersion: 6.1.10
+    created: "2025-04-09T05:25:51.273338173Z"
+    description: A Helm chart for Kubernetes
+    digest: a15ef3907c6d9084f355d4e69dc3b4df990b8ba8001d03a08b12dc979d644b99
+    name: graylog
+    type: application
+    urls:
+    - https://shafnir.github.io/Graylog-HelmChart/graylog/graylog-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-04-08T21:17:55.774668487Z"
+    created: "2025-04-09T05:25:51.2729144Z"
     description: A Helm chart for Kubernetes
     digest: 015edecec4640e889c3c4e7b3e758a9deeda58dd0d599c968528653a0ca6fada
     name: graylog
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://shafnir.github.io/Graylog-HelmChart/graylog/graylog-0.1.0.tgz
     version: 0.1.0
-generated: "2025-04-08T21:17:55.774103141Z"
+generated: "2025-04-09T05:25:51.27227566Z"
