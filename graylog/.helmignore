@@ -24,3 +24,6 @@
 
 # Packaged charts
 *.tgz
+
+# artifacthub-repo yaml
+artifacthub-repo.yml
