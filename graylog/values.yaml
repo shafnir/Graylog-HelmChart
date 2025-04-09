@@ -2,17 +2,17 @@
 
 # Generate a password_secret for graylog internal communications. use the following command: < /dev/urandom tr -dc A-Z-a-z-0-9 | head -c${1:-96}; echo
 # Copy the result to the secret key.
-# For example: 
-# graylogPasswordSecret: NndwQWZ2N1lhbGJUbE82c0J6Q3R5WXUzZXNQcGJlLWFSa2ZUdmZOQ1I0eG5YN1NsTGtKSlJET1BFV3JlNjd0NFlubmZJVFhNaTg2cmJTc2k0NVdETFVOSXZwUy11bnhq
-graylogPasswordSecret: ["YOUR SECRET HERE"]
+
+# It is HIGHLY recommended to change this value with the description above.
+graylogPasswordSecret: NndwQWZ2N1lhbGJUbE82c0J6Q3R5WXUzZXNQcGJlLWFSa2ZUdmZOQ1I0eG5YN1NsTGtKSlJET1BFV3JlNjd0NFlubmZJVFhNaTg2cmJTc2k0NVdETFVOSXZwUy11bnhq
 
 
 # Generate a SHA256 of your desired password for the Graylog Management UI.
 # You can do so with the following command: echo -n "Enter Password: " && head -1 </dev/stdin | tr -d '\n' | sha256sum | cut -d" " -f1
 # Copy the SHA256 result into the graylogRootPasswordSHA256 key.
-# For example: 
-# graylogRootPasswordSHA256: 0c21487938d87494806f527b7939d2bbc12b938bf3baa7b6aba6de27baecdac0
-graylogRootPasswordSHA256: ["YOUR PASSWORD HASH HERE"]
+
+# It is HIGHLY recommended to change this value with the description above.
+graylogRootPasswordSHA256: 0c21487938d87494806f527b7939d2bbc12b938bf3baa7b6aba6de27baecdac0
 
 
 
