@@ -22,6 +22,3 @@ version: 1.0.1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "6.1.10"
-
-annotations:
-  artifacthub.io/logo-url: "https://github.com/shafnir/Graylog-HelmChart/blob/main/graylog/assets/Graylog_logo.png"
