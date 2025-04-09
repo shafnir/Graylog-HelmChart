@@ -24,3 +24,4 @@ version: 1.0.2
 appVersion: "6.1.10"
 
 logo: https://raw.githubusercontent.com/shafnir/Graylog-HelmChart/main/graylog/assets/Graylog_logo.png
+icon: https://raw.githubusercontent.com/shafnir/Graylog-HelmChart/main/graylog/assets/Graylog_logo.png
